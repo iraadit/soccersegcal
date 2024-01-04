@@ -538,7 +538,7 @@ def segs2cam(segs, world_scale, additional_start_cam=None, *, show=False):
     scale_down = 1
     while segs.shape[-1] // scale_down > 120:
         scale_down *= 2
-    segs_lowres = resize(segs, tuple(np.array(segs.shape[-2:]) // scale_down).astype(int), antialias=True)
+    segs_lowres = resize(segs, tuple(int(dim // scale_down) for dim in segs.shape[-2:]), antialias=True)
 
     start_cams = []
     if additional_start_cam is not None:
